@@ -22,6 +22,8 @@ public class User implements UserDetails {
     private String password ;
     private String email ;
     private Role role ;
+    @OneToOne(mappedBy = "user")
+    private ForgetPassword forgetPassword ;
 
 
     @Override
