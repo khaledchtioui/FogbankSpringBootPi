@@ -1,10 +1,12 @@
 package com.fogbank.springsecurity.services.impl;
 
+import com.fogbank.springsecurity.Repository.ProfileRepository;
 import com.fogbank.springsecurity.Repository.UserRepository;
 import com.fogbank.springsecurity.dto.JwtAuthenticationResponse;
 import com.fogbank.springsecurity.dto.RefreshTokenRequest;
 import com.fogbank.springsecurity.dto.SignUpRequest;
 import com.fogbank.springsecurity.dto.SigninRequest;
+import com.fogbank.springsecurity.entities.Profile;
 import com.fogbank.springsecurity.entities.Role;
 import com.fogbank.springsecurity.entities.User;
 import com.fogbank.springsecurity.services.AuthenticationService;
@@ -26,16 +28,25 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordEncoder passwordEncoder  ;
     private final AuthenticationManager authenticationManager ;
     private final JWTService jwtService ;
+    private final ProfileRepository profileRepository ;
 
 
     public User signup(SignUpRequest signUpRequest) {
 
         User user = new User()  ;
+        Profile profile = new Profile(null,"","","","",user) ;
+
         user.setEmail(signUpRequest.getEmail());
         user.setFirstname(signUpRequest.getFirstname());
         user.setLastname(signUpRequest.getLastname());
         user.setRole(Role.USER);
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
+      //  profile.setUser(user);
+
+        System.out.println(profile);
+        user.setProfile(profile);
+        userRepository.save(user) ;
+        profileRepository.save(profile) ;
 
         return userRepository.save(user) ;
 
