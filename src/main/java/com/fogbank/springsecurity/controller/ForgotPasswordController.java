@@ -82,18 +82,18 @@ private  UserRepository userRepository ;
     {
     if(!Objects.equals(changePassword.password(),changePassword.repeatpassword()))
     {
+
+
         return new ResponseEntity<>("Please enter the password again",HttpStatus.EXPECTATION_FAILED)  ;
+
 
     }
 
 
-      //  System.out.println("testA1");
 
-    String encodedPassword = passwordEncoder.encode(changePassword.password())  ;
-      //  System.out.println("testA2");
+        String encodedPassword = passwordEncoder.encode(changePassword.password())  ;
 
         userRepository.updatePassword(email,encodedPassword);
-     //   System.out.println("testA3");
 
         return ResponseEntity.ok("Password has been  changed ") ;
     }

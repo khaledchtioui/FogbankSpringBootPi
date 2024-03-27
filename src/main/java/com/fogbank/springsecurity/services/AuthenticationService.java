@@ -12,4 +12,6 @@ public interface AuthenticationService {
     JwtAuthenticationResponse signin(SigninRequest signinRequest)   ;
     JwtAuthenticationResponse refreshtoken(RefreshTokenRequest refreshTokenRequest)     ;
 
+    User getuserfromauthentication();
+
 }

@@ -12,8 +12,11 @@ import com.fogbank.springsecurity.entities.User;
 import com.fogbank.springsecurity.services.AuthenticationService;
 import com.fogbank.springsecurity.services.JWTService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -90,8 +93,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return null  ;
     }
 
+    @Override
+    public User getuserfromauthentication() {
+        Authentication authentication  = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            User user = (User) authentication.getPrincipal();
+            return user ;
 
-
+        }
+        return new User() ;
+    }
 
 
 }

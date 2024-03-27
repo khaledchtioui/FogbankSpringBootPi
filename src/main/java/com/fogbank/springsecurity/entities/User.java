@@ -61,4 +61,16 @@ private Profile profile;
     public boolean isEnabled() {
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Hello! This is a User object with the following details:\n" +
+                "ID: " + id + "\n" +
+                "Name: " + firstname + " " + lastname + "\n" +
+                "Email: " + email + "\n" +
+                "Role: " + role +
+                "\nThank you!";
+    }
+
+
 }
