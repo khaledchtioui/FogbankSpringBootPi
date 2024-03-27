@@ -24,6 +24,12 @@ public class User implements UserDetails {
     private Role role ;
     @OneToOne(mappedBy = "user")
     private ForgetPassword forgetPassword ;
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+
+private Profile profile;
+
+
 
 
     @Override
