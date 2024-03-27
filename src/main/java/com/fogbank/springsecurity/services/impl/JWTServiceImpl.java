@@ -49,8 +49,10 @@ public class JWTServiceImpl implements JWTService {
 
     private Key getSiginKey()
     {
+
         byte[] key = Decoders.BASE64.decode("413F4428472B4B6250655368566D5970337336763979244226452948404D6351") ;
         return Keys.hmacShaKeyFor(key)  ;
+
     }
 
     private Claims extractAllClaims(String token)
@@ -59,12 +61,19 @@ public class JWTServiceImpl implements JWTService {
     }
     public boolean isTokenValid(String token,UserDetails userDetails)
     {
+
+
+
         final String username = extractUserName(token) ;
         return (username.equals(userDetails.getUsername())&&! isTokenExpired(token))  ;
+
+
     }
 
 
     public String generateRefreshToken(Map<String, Object> extraclaims, UserDetails user) {
+
+
         return Jwts.builder().setClaims(extraclaims).setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+604800000))
