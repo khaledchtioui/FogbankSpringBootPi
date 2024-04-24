@@ -18,7 +18,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/admin")
 @RequiredArgsConstructor
-
+@CrossOrigin(origins = "*", maxAge=3600)
+    
 public class AdminController {
     @Autowired
     private AuthenticationService authenticationService ;
@@ -40,6 +41,9 @@ public class AdminController {
         return ResponseEntity.ok(user.toString()) ;
 
     }
+
+
+    
 
 
 

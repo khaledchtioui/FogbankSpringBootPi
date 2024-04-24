@@ -12,6 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/Articles")
 @AllArgsConstructor
+@CrossOrigin(origins = "*", maxAge=3600)
+
 public class ArticleController {
 
     IArticleService articleService;
