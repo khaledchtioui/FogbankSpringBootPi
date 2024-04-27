@@ -1,9 +1,11 @@
 package com.fogbank.springsecurity.controller;
 
 
+import com.fogbank.springsecurity.entities.Club;
 import com.fogbank.springsecurity.entities.Profile;
 import com.fogbank.springsecurity.entities.User;
 import com.fogbank.springsecurity.services.AuthenticationService;
+import com.fogbank.springsecurity.services.IClubService;
 import com.fogbank.springsecurity.services.ProfileService;
 import com.fogbank.springsecurity.services.UserService;
 import com.fogbank.springsecurity.services.impl.JWTServiceImpl;
@@ -23,6 +25,9 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private AuthenticationService authenticationService ;
+
+    @Autowired
+    IClubService clubService;
 
     @Autowired
    private UserService userService ;
@@ -61,6 +66,21 @@ public class AdminController {
     public void deleteUser(@PathVariable("userId") Long userId) {
         userService.removeUser(userId);
     }
+
+    //omar
+
+    @GetMapping("/retrieveAllClubs")
+    public List<Club> retrieveAllClubs() {return clubService.retrieveAllClubs();}
+    @PostMapping("/addClub")
+    public Club addClub(@RequestBody Club club) {
+        return clubService.addClub(club);
+    }
+    @PutMapping("/updateClub")
+    public Club updateClub(@RequestBody Club club) { return clubService.updateClub(club);}
+    @DeleteMapping("/deleteClub/{IDClub}")
+    public void deleteClub(@PathVariable("IDClub") Integer IDClub){clubService.removeClub(IDClub);}
+    @GetMapping("/retrieveClub/{IDClubb}")
+    public Club retrieveClub(@PathVariable("IDClubb") Integer IDClub){ return clubService.retrieveClub(IDClub); }
 
 
 
