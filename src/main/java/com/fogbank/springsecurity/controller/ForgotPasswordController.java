@@ -22,6 +22,8 @@ import java.util.Random;
 
 @RestController
 @RequestMapping("/forgetpassword")
+@CrossOrigin(origins = "*", maxAge=360000)
+
 
 public class ForgotPasswordController {
     @Autowired
@@ -32,6 +34,22 @@ private  UserRepository userRepository ;
     private ForgetPasswordRepository forgetPasswordRepository ;
     @Autowired
     private PasswordEncoder passwordEncoder  ;
+
+
+    @GetMapping("/verifyMail/{email}")
+    public ResponseEntity<Boolean> verif(@PathVariable String email)
+    {
+        if(userRepository.findByEmail(email).isEmpty())
+        {
+            return ResponseEntity.ok(false)  ;
+
+        }else
+        {
+            return ResponseEntity.ok(true)  ;
+        }
+
+    }
+
     @PostMapping("/verifyMail/{email}")
     public ResponseEntity<String> verifyEmail(@PathVariable String email)
 
