@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -18,11 +17,6 @@ public PublicationInitialeService publicationInitialeService;
     @GetMapping("")
     public List<PublicationInitiale> ChargerTous() {
         return this.publicationInitialeService.chargerTous();
-    }
-
-    @GetMapping("/{id}")
-    public Optional<PublicationInitiale> afficherDetails(@PathVariable Integer id) {
-        return this.publicationInitialeService.afficherDetails(id);
     }
 
     @DeleteMapping("/{id}")
