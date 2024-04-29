@@ -15,17 +15,19 @@ public class EvenementServiceImpl implements EvenementService {
     private EvenementRepository evenementRepository;
 
     @Override
-    public Evenement createEvenement(Evenement evenement) {
+    public Evenement addEvent(Evenement evenement) {
+
         return evenementRepository.save(evenement);
     }
 
     @Override
-    public List<Evenement> getAllEvenements() {
+    public List<Evenement> getAllEvent() {
+
         return evenementRepository.findAll();
     }
 
     @Override
-    public Evenement updateEvenement(Long id, Evenement evenement) {
+    public Evenement updateEvent(Long id, Evenement evenement) {
         Optional<Evenement> existingEvenementOptional = evenementRepository.findById(id);
         if (existingEvenementOptional.isPresent()) {
             Evenement existingEvenement = existingEvenementOptional.get();
@@ -42,9 +44,17 @@ public class EvenementServiceImpl implements EvenementService {
     }
 
     @Override
-    public void deleteEvenement(Long id) {
+    public void deleteEvent(Long id) {
+
         evenementRepository.deleteById(id);
     }
+
+    @Override
+    public Evenement getEvent(Long id) {
+        return evenementRepository.findById(id).orElse(null);
+    }
+
+
 
 
 }

@@ -25,6 +25,7 @@ public class Evenement {
     private Date dateDebut;
     private Date dateFin;
     private String lieu;
+    private String imageUrl;
 
 
 }

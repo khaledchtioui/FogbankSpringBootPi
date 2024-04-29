@@ -8,34 +8,46 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/evenements")
+@RequestMapping("/admin/events")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EvenementController {
 
     @Autowired
     private EvenementService evenementService;
 
-    @PostMapping
-    public ResponseEntity<Evenement> createEvenement(@RequestBody Evenement evenement) {
-        Evenement createdEvenement = evenementService.createEvenement(evenement);
-        return new ResponseEntity<>(createdEvenement, HttpStatus.CREATED);
+    @PostMapping("/createEvents")
+    public Evenement addEvent (@RequestBody Evenement evenement) {
+
+        return evenementService.addEvent(evenement);
     }
 
+
     @GetMapping
-    public ResponseEntity<List<Evenement>> getAllEvenements() {
-        List<Evenement> evenements = evenementService.getAllEvenements();
+    public ResponseEntity<List<Evenement>> getAllEvent() {
+        List<Evenement> evenements = evenementService.getAllEvent();
         return new ResponseEntity<>(evenements, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Evenement> updateEvenement(@PathVariable Long id, @RequestBody Evenement evenement) {
-        Evenement updatedEvenement = evenementService.updateEvenement(id, evenement);
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Evenement> updateEvent(@PathVariable Long id, @RequestBody Evenement evenement) {
+        Evenement updatedEvenement = evenementService.updateEvent(id, evenement);
         return new ResponseEntity<>(updatedEvenement, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEvenement(@PathVariable Long id) {
-        evenementService.deleteEvenement(id);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
+        evenementService.deleteEvent(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Evenement> getEvent(@PathVariable Long id) {
+        Evenement event = evenementService.getEvent(id);
+        if (event != null) {
+            return ResponseEntity.ok().body(event);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }
