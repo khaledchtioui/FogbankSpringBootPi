@@ -13,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Entity
 public  class  PublicationGenerale {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long idPublication;
 
