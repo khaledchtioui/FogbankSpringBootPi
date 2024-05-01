@@ -1,8 +1,6 @@
 package com.fogbank.springsecurity.entities.forum;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fogbank.springsecurity.entities.User;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -13,21 +11,23 @@ import java.util.Date;
 @Data
 @RequiredArgsConstructor
 @Entity
-public class LikePublication {
+public class SignalementPost {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long idLike;
-
-    private Date dateLike;
+    int signalementId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference(value = "publicationReference")
     private PublicationGenerale publication;
 
+        private String commentaire;
+
+    private String etat;
+
+
+    private Date dateSignalement;
+
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     private User user;
-
-
-
 }

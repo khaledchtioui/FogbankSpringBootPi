@@ -1,5 +1,7 @@
 package com.fogbank.springsecurity.entities.forum;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -16,7 +18,8 @@ import java.util.List;
 public class PublicationInitiale extends PublicationGenerale{
 
     private String titre;
-    @OneToMany()
+    @JsonManagedReference(value = "publicationReponse")
+    @OneToMany(mappedBy = "publicationInitiale")
     private List<ReponsePublication> reponsePublicationList =new ArrayList<>();
 
 }
