@@ -58,12 +58,12 @@ public class AdminController {
     }
 
     @GetMapping("/getUser/{id}")
-    public User getUser(@PathVariable("id") Long id) {
+    public User getUser(@PathVariable("id") Integer id) {
         return userService.getUser(id);
     }
 
     @DeleteMapping("/delete/{userId}")
-    public void deleteUser(@PathVariable("userId") Long userId) {
+    public void deleteUser(@PathVariable("userId") Integer userId) {
         userService.removeUser(userId);
     }
 

@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,15 +34,38 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeUser(Long idUser) {
+    public Optional<User> getUserById(Integer userId) {
+        return userRepository.findById(userId);
+    }
+
+    @Override
+    public void removeUser(Integer   idUser) {
 
         userRepository.deleteById(idUser);
 
     }
 
     @Override
-    public User getUser(Long idUser) {
+    public User getUser(Integer idUser) {
         return userRepository.findById(idUser).orElse(null);
+    }
+
+    @Override
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User updateUserSelective(User user) {
+        return userRepository.findById(user.getId()).map(existingUser -> {
+            if(user.getAddress() != null) existingUser.setAddress(user.getAddress());
+            if(user.getBio() != null) existingUser.setBio(user.getBio());
+            if(user.getEmail() != null) existingUser.setEmail(user.getEmail());
+            if(user.getFirstname() != null) existingUser.setFirstname(user.getFirstname());
+            if(user.getLastname() != null) existingUser.setLastname(user.getLastname());
+            if(user.getMobilePhone() != null) existingUser.setMobilePhone(user.getMobilePhone());
+            return userRepository.save(existingUser);
+        }).orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
     }
 
 

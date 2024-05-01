@@ -22,12 +22,20 @@ public class User implements UserDetails {
     private String password ;
     private String email ;
     private Role role ;
+    private String bio;
+    private String address;
+    private String mobilePhone;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] photo;
+
+
+
+
     @OneToOne(mappedBy = "user")
     private ForgetPassword forgetPassword ;
 //    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 
-private Profile profile;
 
 
 
@@ -68,7 +76,10 @@ private Profile profile;
                 "ID: " + id + "\n" +
                 "Name: " + firstname + " " + lastname + "\n" +
                 "Email: " + email + "\n" +
-                "Role: " + role +
+                "Role: " + role.name() +
+                "Bio: " + bio +
+                "Address: " + address +
+                "Mobile Phone: " + mobilePhone +
                 "\nThank you!";
     }
 

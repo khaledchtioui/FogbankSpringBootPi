@@ -10,6 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 @SpringBootApplication
 public class SpringsecurityApplication implements CommandLineRunner {
 @Autowired
@@ -27,6 +32,15 @@ public  void run(String ... args)
 		user.setEmail("admin@admin.com");
 		user.setFirstname("admin");
 		user.setLastname("admin");
+		try {
+			Path path = Paths.get("src/main/resources/static/images/admin.jpg");
+			byte[] imageBytes = Files.readAllBytes(path);
+			user.setPhoto(imageBytes);
+		} catch (IOException e) {
+			// Handle file read error
+			// Log the error or throw a custom exception
+			e.printStackTrace();
+		}
 		user.setRole(Role.ADMIN);
 		user.setPassword(new BCryptPasswordEncoder().encode("admin"));
 		userRepository.save(user)  ;
