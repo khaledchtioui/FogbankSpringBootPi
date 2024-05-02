@@ -22,6 +22,7 @@ public class Article implements Serializable {
     Integer id;
     String auteur;
     String titre;
+    @Column(columnDefinition = "TEXT")
     String contenu;
     Date date;
     @JsonIgnoreProperties("article")
