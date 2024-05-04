@@ -1,5 +1,6 @@
 package com.fogbank.springsecurity.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,15 +30,15 @@ public class User implements UserDetails {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] photo;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "userarticle", cascade = CascadeType.ALL)
+    private List<Article> articles;
+
 
 
 
     @OneToOne(mappedBy = "user")
     private ForgetPassword forgetPassword ;
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-
-
-
 
 
     @Override

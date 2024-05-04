@@ -22,9 +22,16 @@ public class Article implements Serializable {
     Integer id;
     String auteur;
     String titre;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] photo;
     @Column(columnDefinition = "TEXT")
     String contenu;
     Date date;
+    @ManyToOne
+    private User userarticle;
+
+
     @JsonIgnoreProperties("article")
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<Comment> comments;
