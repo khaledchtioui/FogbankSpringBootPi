@@ -22,6 +22,8 @@ public interface UserService  {
     User updateUser(User user) ;
      User updateUserSelective(User user) ;
 
+     void uploadUserPhoto(Integer idUser, byte[] photo) ;
+
 
 
 

@@ -17,7 +17,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -55,6 +57,22 @@ public class UserController {
         return ResponseEntity.ok(user.toString()) ;
 
     }
+
+
+    @PostMapping(value="/{id}/photo", consumes = {"multipart/form-data"})
+    public ResponseEntity<?> uploadUserPhoto(@PathVariable("id") Integer id, @RequestParam("photo") MultipartFile photo) throws IOException {
+        // Call your service method to handle the photo upload
+
+                byte[] photoBytes = null;
+                if (!photo.isEmpty()) {
+                    photoBytes = photo.getBytes();
+                }
+
+
+        userService.uploadUserPhoto(id, photoBytes);
+        return ResponseEntity.ok().build();
+    }
+
 
     @GetMapping("/users/{userId}/photo")
     public ResponseEntity<byte[]> getUserPhoto(@PathVariable Integer userId) {

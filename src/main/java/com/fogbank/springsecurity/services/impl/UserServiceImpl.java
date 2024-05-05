@@ -68,5 +68,15 @@ public class UserServiceImpl implements UserService {
         }).orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
     }
 
+    @Override
+    public void uploadUserPhoto(Integer idUser, byte[] photo) {
+
+        User user =userRepository.findById(idUser).get();
+        user.setPhoto(photo);
+        userRepository.save(user);
+
+
+    }
+
 
 }
