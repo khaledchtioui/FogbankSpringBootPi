@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -72,5 +73,12 @@ private Profile profile;
                 "\nThank you!";
     }
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="userp")
+    private Set<Product> products;
 
+
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="userlp")
+    private Set<LostProduct> lostProducts;
 }
