@@ -3,6 +3,7 @@ package com.fogbank.springsecurity.entities.forum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fogbank.springsecurity.entities.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.Date;
 @Data
 @RequiredArgsConstructor
 @Entity
+@AllArgsConstructor
 public class SignalementPost {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +22,7 @@ public class SignalementPost {
     @ManyToOne(fetch = FetchType.EAGER)
     private PublicationGenerale publication;
 
-        private String commentaire;
+    private String commentaire;
 
     private String etat;
 
@@ -28,6 +30,5 @@ public class SignalementPost {
     private Date dateSignalement;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference
     private User user;
 }

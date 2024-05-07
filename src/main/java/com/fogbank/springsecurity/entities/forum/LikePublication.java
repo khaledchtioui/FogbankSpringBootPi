@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fogbank.springsecurity.entities.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.Date;
 @Data
 @RequiredArgsConstructor
 @Entity
+@AllArgsConstructor
 public class LikePublication {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
