@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ReponsePublicationService implements IReponsePublicationService {
     private ReponsePublicationRepository reponsePublicationRepository;
+    private SmsTool smsTool;
 
     @Override
     public List<ReponsePublication> chargerTous() {
@@ -28,6 +29,8 @@ public class ReponsePublicationService implements IReponsePublicationService {
         LocalDateTime currentDateTime = LocalDateTime.now();
         Instant instant = currentDateTime.atZone(ZoneId.systemDefault()).toInstant();
         reponsePublication.setDatePublication(Date.from(instant));
+        smsTool.envoyer("test","+21628168997");
+        //smsTool.envoyer("nouvelle reponse recu de la part de "+reponsePublication.getUser().getFirstname(),reponsePublication.getPublicationInitiale().getUser().getMobilePhone());
         return reponsePublicationRepository.save(reponsePublication);
     }
 

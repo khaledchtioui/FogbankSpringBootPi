@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 public class PublicationInitiale extends PublicationGenerale{
-
+    private Integer vue;
     private String titre;
     @JsonManagedReference(value = "publicationReponse")
     @OneToMany(mappedBy = "publicationInitiale")
