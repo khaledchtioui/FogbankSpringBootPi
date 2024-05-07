@@ -1,0 +1,7 @@
+{
+  "name": "BackGit",
+  "version": "1.0.0",
+  "dependencies": {
+    "googleapis": "^137.1.0"
+  }
+}

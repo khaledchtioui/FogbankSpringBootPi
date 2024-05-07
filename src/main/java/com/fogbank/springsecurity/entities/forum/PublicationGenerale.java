@@ -22,6 +22,8 @@ public  class  PublicationGenerale {
 
     private String description;
 
+     boolean visibility;
+
     private Date datePublication;
 
     @OneToMany(mappedBy = "publication")

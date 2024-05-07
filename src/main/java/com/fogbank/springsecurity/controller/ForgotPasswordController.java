@@ -22,7 +22,7 @@ import java.util.Random;
 
 @RestController
 @RequestMapping("/forgetpassword")
-@CrossOrigin(origins = "*", maxAge=360000)
+@CrossOrigin(origins = "*", maxAge=3600)
 
 
 public class ForgotPasswordController {
@@ -54,24 +54,26 @@ private  UserRepository userRepository ;
     public ResponseEntity<String> verifyEmail(@PathVariable String email)
 
     {
-       // System.out.println("testA");
+        System.out.println("testA");
         User user =userRepository.findByEmail(email).orElseThrow(()->new UsernameNotFoundException("Please provide an valid email "))  ;
         int otp = otpGenerator()  ;
+        System.out.println(otp);
         MailBody mailBody = MailBody.builder().to(email)
                 .text("This is the OTP For Your Forgot Password  request : "+otp)
                 .subject("Otp for Forgot password")
                 .build() ;
-    //    System.out.println("testB");
+      System.out.println("testB");
 
         ForgetPassword fp = ForgetPassword.builder()
                 .otp(otp)
                 .expirationtime(new Date(System.currentTimeMillis()+120*1000))
                 .user(user)
                 .build() ;
-     //   System.out.println("testC");
+       System.out.println("testC");
 
 
         emailService.sendSimpleMessage(mailBody);
+        System.out.println("testD");
         forgetPasswordRepository.save(fp) ;
         return ResponseEntity.ok("Email sent for verification")  ;
 
@@ -81,6 +83,7 @@ private  UserRepository userRepository ;
     @PostMapping("/verifyOtp/{otp}/{email}")
     public ResponseEntity<String> verifyOtp(@PathVariable Integer otp , @PathVariable String email)
     {
+        System.out.println(otp);
         User user =userRepository.findByEmail(email)
                                  .orElseThrow(()->new UsernameNotFoundException("Please provide an valid email "))  ;
 
@@ -91,7 +94,7 @@ private  UserRepository userRepository ;
             return new ResponseEntity<>("OTP has  expired ", HttpStatus.EXPECTATION_FAILED)  ;
         }
 
-
+        System.out.println("Test otp");
         return ResponseEntity.ok("OTP verified")  ;
     }
 

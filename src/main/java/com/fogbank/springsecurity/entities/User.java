@@ -36,7 +36,7 @@ public class User implements UserDetails {
 
 
 
-
+    @JsonIgnore
     @OneToOne(mappedBy = "user")
     private ForgetPassword forgetPassword ;
 
