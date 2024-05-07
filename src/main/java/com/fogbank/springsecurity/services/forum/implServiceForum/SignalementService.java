@@ -7,6 +7,10 @@ import com.fogbank.springsecurity.services.forum.ISignalementService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +27,11 @@ public class SignalementService implements ISignalementService {
 
     @Override
     public SignalementPost ajouter(SignalementPost signalementPost) {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Instant instant = currentDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        signalementPost.setDateSignalement(Date.from(instant));
+        signalementPost.setEtat("non traité");
+
         return signalementRepository.save(signalementPost);
     }
 

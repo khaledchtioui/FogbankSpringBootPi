@@ -26,6 +26,7 @@ public class PublicationInitialeService implements IPublicationInitialeService {
 
     @Override
     public PublicationInitiale ajouter(PublicationInitiale publicationInitiale) {
+        publicationInitiale.setVue(0);
         LocalDateTime currentDateTime = LocalDateTime.now();
         Instant instant = currentDateTime.atZone(ZoneId.systemDefault()).toInstant();
         publicationInitiale.setDatePublication(Date.from(instant));
@@ -45,7 +46,14 @@ public class PublicationInitialeService implements IPublicationInitialeService {
 
 
     public Optional<PublicationInitiale> afficherDetails(int id){
-        return publicationInitialeRepository.findById(id);
+        Optional<PublicationInitiale> publicationInitiale=publicationInitialeRepository.findById(id);
+        if (publicationInitiale.isPresent()) {
+            PublicationInitiale publicationInitialee = publicationInitiale.get();
+            publicationInitialee.setVue(publicationInitialee.getVue()+1);
+            publicationInitialeRepository.save(publicationInitialee);
+        }
+
+        return publicationInitiale;
 
     }
 }
