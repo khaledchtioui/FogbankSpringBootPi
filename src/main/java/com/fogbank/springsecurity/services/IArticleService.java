@@ -1,20 +1,19 @@
 package com.fogbank.springsecurity.services;
 
 import com.fogbank.springsecurity.entities.Article;
-import com.fogbank.springsecurity.entities.User;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface IArticleService {
     List<Article> getAllArticles();
-
+    void deleteArticle(Integer id);
+    Article addArticle(Article article, Integer userId);
+    Article updateArticle(Article article);
     Article getArticleById(Integer id);
 
-    void deleteArticle(Integer id);
+    Article handleImageFileUpload(MultipartFile fileImage, Integer id);
 
-    Article updateArticle(Article article);
-
-    Article addArticle(String auteur, String titre, byte[] photo, String contenu, User userarticle);
-
-
+     List<Article> getAllArticlesByUserId(Integer userId);
+    String shareFb(Integer id);
 }

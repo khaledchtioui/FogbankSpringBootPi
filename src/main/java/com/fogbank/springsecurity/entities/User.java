@@ -30,10 +30,6 @@ public class User implements UserDetails {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] photo;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "userarticle", cascade = CascadeType.ALL)
-    private List<Article> articles;
-
 
 
     @JsonIgnore
