@@ -51,7 +51,7 @@ return  productRepository.save(product);
     }
 
     @Override
-    public void ajouterEtaffecterListeProduct(List<Product> lb, Long iduser) {
+    public void ajouterEtaffecterListeProduct(List<Product> lb, Integer iduser) {
         productRepository.saveAll(lb);
         User user = userRepository.findById(iduser).orElse(null);
         for (Product product : lb) {
@@ -61,7 +61,7 @@ return  productRepository.save(product);
     }
 
 
-    public Product addProductU(String type, String picture, String description, String name, String phone, String email, String address, Long userId) {
+    public Product addProductU(String type, String picture, String description, String name, String phone, String email, String address, Integer userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 

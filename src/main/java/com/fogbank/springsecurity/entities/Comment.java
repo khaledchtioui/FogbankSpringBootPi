@@ -18,10 +18,14 @@ public class Comment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer idC;
+    Integer idc;
     String comment;
-    Date dateC;
+    Date datec;
     @ManyToOne
     @JoinColumn(name = "articleId")
     private Article article;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

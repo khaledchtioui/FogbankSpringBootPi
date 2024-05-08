@@ -4,8 +4,13 @@ import java.util.List;
 
 
 public interface EvenementService {
-    Evenement createEvenement(Evenement evenement);
-    List<Evenement> getAllEvenements();
-    Evenement updateEvenement(Long id, Evenement evenement);
-    void deleteEvenement(Long id);
-}
+    Evenement addEvent(Evenement evenement);
+    List<Evenement> getAllEvent();
+    Evenement updateEvent(Long id, Evenement evenement);
+    void deleteEvent(Long id);
+    Evenement getEvent(Long id);
+    void participateEvent(Long eventId, Long userId) ;
+
+
+
+    }

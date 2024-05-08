@@ -10,7 +10,7 @@ public interface LostProductService {
     void deleteLostProduct(Integer id);
     LostProduct addLostProduct(LostProduct lostProduct);
     LostProduct updateLostProduct(LostProduct lostProduct);
-    void ajouterEtaffecterListeLostProduct (Integer idp, Long idu);
+    void ajouterEtaffecterListeLostProduct (Integer idp, Integer idu);
     List<Object[]> getAllLostProduct();
 
 }

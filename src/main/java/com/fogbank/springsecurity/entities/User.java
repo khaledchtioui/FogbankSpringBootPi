@@ -1,5 +1,6 @@
 package com.fogbank.springsecurity.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity
@@ -23,14 +23,18 @@ public class User implements UserDetails {
     private String password ;
     private String email ;
     private Role role ;
+    private String bio;
+    private String address;
+    private String mobilePhone;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] photo;
+
+
+
+    @JsonIgnore
     @OneToOne(mappedBy = "user")
     private ForgetPassword forgetPassword ;
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-
-private Profile profile;
-
-
 
 
     @Override
@@ -69,16 +73,12 @@ private Profile profile;
                 "ID: " + id + "\n" +
                 "Name: " + firstname + " " + lastname + "\n" +
                 "Email: " + email + "\n" +
-                "Role: " + role +
+                "Role: " + role.name() +
+                "Bio: " + bio +
+                "Address: " + address +
+                "Mobile Phone: " + mobilePhone +
                 "\nThank you!";
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="userp")
-    private Set<Product> products;
 
-
-
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="userlp")
-    private Set<LostProduct> lostProducts;
 }

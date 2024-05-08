@@ -20,11 +20,20 @@ public class Article implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    String auteur;
     String titre;
+    String image;
+    @Column( columnDefinition = "TEXT")
     String contenu;
     Date date;
     @JsonIgnoreProperties("article")
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<Comment> comments;
+
+    @ManyToOne
+    @JoinColumn(name = "auteur")
+    private User auteur;
+
+    @JsonIgnoreProperties("article")
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private List<Likes> likes;
 }

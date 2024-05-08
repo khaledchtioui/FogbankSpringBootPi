@@ -45,7 +45,7 @@ public class ProductController {
 
     @PostMapping("/prodwu/{id}")
     @ResponseBody
-    void ajouterEtaffecterListeProduct(@RequestBody List<Product> lp,@PathVariable("id") Long iduser) {
+    void ajouterEtaffecterListeProduct(@RequestBody List<Product> lp,@PathVariable("id") Integer iduser) {
         productService.ajouterEtaffecterListeProduct(lp, iduser);
     }
 
@@ -58,7 +58,7 @@ public class ProductController {
             @RequestParam String phone,
             @RequestParam String email,
             @RequestParam String address,
-            @RequestParam Long userId) {
+            @RequestParam Integer userId) {
 
         Product product = productService.addProductU(type, picture, description, name, phone, email, address, userId);
         return new ResponseEntity<>(product, HttpStatus.CREATED);

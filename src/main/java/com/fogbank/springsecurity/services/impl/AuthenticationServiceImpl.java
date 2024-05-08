@@ -20,6 +20,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 @Service
@@ -34,25 +38,32 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final ProfileRepository profileRepository ;
 
 
-    public User signup(SignUpRequest signUpRequest) {
-
-        User user = new User()  ;
-        Profile profile = new Profile(null,"","","","",user) ;
+    public User signup(SignUpRequest signUpRequest) throws IOException {
+        User user = new User();
 
         user.setEmail(signUpRequest.getEmail());
         user.setFirstname(signUpRequest.getFirstname());
         user.setLastname(signUpRequest.getLastname());
         user.setRole(Role.USER);
+        user.setBio("");
+        user.setAddress("");
+        user.setMobilePhone("");
+
+        try {
+            Path path = Paths.get("src/main/resources/static/images/user2.jpg");
+            byte[] imageBytes = Files.readAllBytes(path);
+            user.setPhoto(imageBytes);
+        } catch (IOException e) {
+            // Handle file read error
+            // Log the error or throw a custom exception
+            e.printStackTrace();
+        }
+
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
-      //  profile.setUser(user);
 
-        System.out.println(profile);
-        user.setProfile(profile);
-        userRepository.save(user) ;
-        profileRepository.save(profile) ;
+        userRepository.save(user);
 
-        return userRepository.save(user) ;
-
+        return user;
     }
 
 

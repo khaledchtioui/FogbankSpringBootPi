@@ -53,7 +53,7 @@ public class LostProductServiceImp implements LostProductService {
     }
 
     @Override
-    public void ajouterEtaffecterListeLostProduct(Integer idp, Long idu) {
+    public void ajouterEtaffecterListeLostProduct(Integer idp, Integer idu) {
 
         User user = userRepository.findById(idu)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + idu));

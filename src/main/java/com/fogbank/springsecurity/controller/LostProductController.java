@@ -20,7 +20,7 @@ public class LostProductController {
     }
     @PostMapping("/listeLostP/{idp}/{idu}")
     @ResponseBody
-    void ajouterEtaffecterListeLostProduct(@PathVariable("idp") Integer idp,@PathVariable("idu") Long idu) {
+    void ajouterEtaffecterListeLostProduct(@PathVariable("idp") Integer idp,@PathVariable("idu") Integer idu) {
         lostProductService.ajouterEtaffecterListeLostProduct(idp, idu);
     }
     @GetMapping
