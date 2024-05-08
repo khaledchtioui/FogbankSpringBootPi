@@ -22,6 +22,8 @@ public  class  PublicationGenerale {
     @Column(length = 5000)
     private String description;
 
+     boolean visibility;
+
     private Date datePublication;
 
     @OneToMany(mappedBy = "publication",fetch = FetchType.EAGER)
