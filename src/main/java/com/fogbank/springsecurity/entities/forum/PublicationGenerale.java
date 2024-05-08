@@ -19,14 +19,14 @@ public  class  PublicationGenerale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long idPublication;
-
+    @Column(length = 5000)
     private String description;
 
      boolean visibility;
 
     private Date datePublication;
 
-    @OneToMany(mappedBy = "publication")
+    @OneToMany(mappedBy = "publication",fetch = FetchType.EAGER)
     @JsonManagedReference(value = "publicationReference")
     private List<LikePublication> likePublicationList =new ArrayList<>();
 

@@ -17,9 +17,7 @@ import java.io.InputStreamReader;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,8 +28,11 @@ public class PublicationInitialeService implements IPublicationInitialeService {
 
     @Override
     public List<PublicationInitiale> chargerTous() {
-        return publicationInitialeRepository.findByVisibilityTrue();
-    }
+        List<PublicationInitiale> publications = publicationInitialeRepository.findByVisibilityTrue();
+
+        Collections.sort(publications, Comparator.comparingInt(PublicationInitiale::getScore).reversed());
+
+        return publications;    }
 
     @Override
     public PublicationInitiale ajouter(PublicationInitiale publicationInitiale) {
