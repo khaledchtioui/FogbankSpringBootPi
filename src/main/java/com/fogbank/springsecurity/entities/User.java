@@ -1,5 +1,7 @@
 package com.fogbank.springsecurity.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,7 +32,12 @@ public class User implements UserDetails {
 private Profile profile;
 
 
-
+@ManyToMany()
+private List<Club>clubs;
+@JsonIgnoreProperties(value = {"user"}, allowSetters = true)
+@OneToMany(mappedBy = "user")
+@JsonManagedReference(value="secondback")
+private List<Adhésion>adhésions;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

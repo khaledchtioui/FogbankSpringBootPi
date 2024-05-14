@@ -1,9 +1,11 @@
 package com.fogbank.springsecurity.controller;
 
 
+import com.fogbank.springsecurity.entities.Adhésion;
 import com.fogbank.springsecurity.entities.Profile;
 import com.fogbank.springsecurity.entities.User;
 import com.fogbank.springsecurity.services.AuthenticationService;
+import com.fogbank.springsecurity.services.IAdhésionService;
 import com.fogbank.springsecurity.services.ProfileService;
 import com.fogbank.springsecurity.services.impl.AuthenticationServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +17,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", maxAge=3600)
 
 public class UserController {
 
@@ -28,8 +33,11 @@ public class UserController {
     private ProfileService profileService ;
 
 
+
     @Autowired
     private   AuthenticationService authenticationService ;
+
+
 
     @GetMapping
     public ResponseEntity<String> sayHello()
@@ -53,10 +61,12 @@ public class UserController {
         {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-
-
     }
+
+
+
+
+
 
 
 
